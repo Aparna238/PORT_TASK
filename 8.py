@@ -1,5 +1,6 @@
 import pandas as pd
 import xml.dom.minidom
+import logging
 from xml.etree.ElementTree import Element, SubElement, tostring, ElementTree
 
 logging.basicConfig(level=logging.DEBUG,
