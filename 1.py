@@ -48,7 +48,7 @@ if __name__ == "__main__":
     folder_path = args.input
 
     parse_folder = Path("Ports_arxml")
-    folder_path_2 = folder_path / parse_folder
+    folder_path_2 = Path(folder_path) / parse_folder
 
     for file_path in folder_path_2.iterdir():
         if file_path.suffix == '.arxml':
