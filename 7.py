@@ -32,6 +32,9 @@ for i1,row1 in df1.iterrows():
                     break
 
 df7 = pd.DataFrame(data7)
+with pd.ExcelWriter('Port_Data.xlsx', engine='openpyxl') as writer:
+        intercore.to_excel(writer, sheet_name='Sheet1', index=False)
+        data_sheet.to_excel(writer, sheet_name='Sheet2', index=False)
 df7.to_excel('7.xlsx',index=False)
 
 
