@@ -38,7 +38,7 @@ if __name__ == "__main__":
     parser.add_argument('--input','-i')
     args = parser.parse_args()
 
-    folder_path = args.input
+    folder_path = Path(args.input)
     for file_path in folder_path.iterdir():
         if file_path.name == 'FlatExtract.arxml':
             logging.info(f"Started parsing {file_path.name}")
