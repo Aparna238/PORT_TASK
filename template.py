@@ -336,7 +336,7 @@ class Template(threading.Thread):
         connections = SubElement(integration_requirements, 'Connections')
         sender_receiver = SubElement(connections, 'SenderReceiver')
         # self.log_update("Root elements created")
-
+        count=0
         for row in self.data6:
             connection = SubElement(sender_receiver, 'Connection')
             receiver = SubElement(connection, 'Receiver', Parent=row['r-port-swc'])
