@@ -94,7 +94,7 @@ class Template(threading.Thread):
             swc_name = application.find('.//ns:SHORT-NAME', ns).text
             for port in application.findall('.//ns:P-PORT-PROTOTYPE',ns):
                 port_name = port.find('.//ns:SHORT-NAME', ns).text
-                self.log_update(f"Provider port name found : {port_name}")
+                # self.log_update(f"Provider port name found : {port_name}")
                 interface_type = port.find('.//ns:PROVIDED-INTERFACE-TREF', ns).get('DEST')
                 if interface_type=='SENDER-RECEIVER-INTERFACE':
                     interface_name = port.find('.//ns:PROVIDED-INTERFACE-TREF', ns).text
@@ -103,7 +103,7 @@ class Template(threading.Thread):
 
                 for port in application.findall('.//ns:R-PORT-PROTOTYPE',ns):
                     port_name = port.find('.//ns:SHORT-NAME', ns).text
-                    self.log_update(f"Reciever port name found : {port_name}")
+                    # self.log_update(f"Reciever port name found : {port_name}")
                     interface_type = port.find('.//ns:REQUIRED-INTERFACE-TREF', ns).get('DEST')
                     if interface_type=='SENDER-RECEIVER-INTERFACE':
                         interface_name = port.find('.//ns:REQUIRED-INTERFACE-TREF', ns).text
@@ -116,12 +116,12 @@ class Template(threading.Thread):
 
         for interface in root.findall(tag,ns):
                 interface_name = interface.find('.//ns:SHORT-NAME', ns).text
-                self.log_update(f"Found interface swc: {interface_name}")
+                # self.log_update(f"Found interface swc: {interface_name}")
                 for type in interface.findall('.//ns:TYPE-TREF',ns):
                     interface_type = type.get('DEST')
                     interface_type_ref = type.text
                     interface_type_ref = interface_type_ref.split('/')[-1]
-                    self.log_update(f"Found interface type reference: {interface_type_ref}")
+                    # self.log_update(f"Found interface type reference: {interface_type_ref}")
                     self.data2.append({'interface_name':interface_name, 'interface_type':interface_type,'interface_type_ref':interface_type_ref})
 
     
@@ -133,14 +133,14 @@ class Template(threading.Thread):
         for data_type in root.findall(tag,ns):
             swc_name = data_type.find('.//ns:SHORT-NAME',ns).text
             for data_ in data_type.findall('.//ns:DATA-TYPE-MAP',ns):
-                self.log_update("DATA-TYPE-MAP found")
+                # self.log_update("DATA-TYPE-MAP found")
                 application = data_.find('.//ns:APPLICATION-DATA-TYPE-REF', ns).text
                 application = application.split('/')[-1]
-                self.log_update(f"Application-data-type:{application} ")
+                # self.log_update(f"Application-data-type:{application} ")
                 implementation = data_.find('.//ns:IMPLEMENTATION-DATA-TYPE-REF', ns).text
                 implementation = implementation.split('/')[-1]
                 self.data3.append({'Application_Ref':application, 'Implementation_Ref':implementation,'SWC':swc_name})
-                self.log_update(f"Implementation-data-type:{implementation} ")
+                # self.log_update(f"Implementation-data-type:{implementation} ")
 
         for implement in root.findall('.//ns:IMPLEMENTATION-DATA-TYPE',ns):
             short_name = implement.find('.//ns:SHORT-NAME',ns).text
@@ -148,13 +148,13 @@ class Template(threading.Thread):
                 if short_name == row['Implementation_Ref']:
                     category = implement.find('.//ns:CATEGORY',ns).text
                     row['Category'] = category
-                    self.log_update(f"Category found: {category}")
+                    # self.log_update(f"Category found: {category}")
 
     def parse_xml4(self,file,tag):
         root,ns = self.get_xml_basics(file)
 
         for connector in root.findall(tag,ns):
-            self.log_update('Found assembly-sw-connector')
+            # self.log_update('Found assembly-sw-connector')
             for p_port in connector.findall('.//ns:TARGET-P-PORT-REF',ns):
                 p_port_type = p_port.get('DEST')
                 pport_name = p_port.text
@@ -165,7 +165,7 @@ class Template(threading.Thread):
                 rport_name = r_port.text
                 r_port_name = rport_name.split('/')[-1]
                 r_port_swc = rport_name.split('/')[-2]
-            self.log_update(f'P-port : {p_port_swc}, R-port: {r_port_swc}')
+            # self.log_update(f'P-port : {p_port_swc}, R-port: {r_port_swc}')
             self.data4.append({'P-port-type': p_port_type,'P-port-name':p_port_name,'P-port-swc': p_port_swc,'R-port-type': r_port_type,'R-port-name':r_port_name,'R-port-swc': r_port_swc})
 
 
@@ -180,11 +180,11 @@ class Template(threading.Thread):
                     index = short_name.lower().find("_core") + 5
                     core_no = short_name[index : index + 1]
                     self.data5.append({'swc-name':short_name,'core-no':core_no})
-                    self.log_update(f'Extracted core number: {core_no}')
+                    # self.log_update(f'Extracted core number: {core_no}')
                 elif "Par" in short_name:
                     core_no = "Not mentioned"
                     self.data5.append({'swc-name':short_name,'core-no':core_no})
-                    self.log_update(f'Extracted core number: {core_no}')
+                    # self.log_update(f'Extracted core number: {core_no}')
                 else:
                     for value_ref in ecuc.findall(".//ns:VALUE-REF",ns):
                         dest = value_ref.get('DEST')
@@ -194,7 +194,7 @@ class Template(threading.Thread):
                                 index = core_details.find("Core") + 4
                                 core_no = core_details[index : index + 1]
                                 self.data5.append({'swc-name':short_name,'core-no':core_no})
-                                self.log_update(f'Extracted core number: {core_no}')
+                                # self.log_update(f'Extracted core number: {core_no}')
                                 break
 
 
@@ -224,7 +224,7 @@ class Template(threading.Thread):
         self.highlight("Task 3 Started")
         for file_path in self.folder.iterdir():
             if file_path.name == 'DataTypes.arxml':
-                self.log_update(f"Started parsing {file_path.name}")
+                # elf.log_update(f"Started parsing {file_path.name}")
                 self.parse_xml3(file_path,".//ns:DATA-TYPE-MAPPING-SET")
                 self.log_update(f"Parsing done {file_path.name}")
         self.highlight("Task 3 Finished")
@@ -256,7 +256,7 @@ class Template(threading.Thread):
             p_swc_name = p_swc + "_EcuSwComposition"
             r_swc = rows['R-port-swc']
             r_swc_name = r_swc + "_EcuSwComposition"
-            self.log_update(f"P = {p_swc_name}, R = {r_swc_name}")
+            # self.log_update(f"P = {p_swc_name}, R = {r_swc_name}")
             for row in self.data5:
                 if p_swc_name == r_swc_name:
                     break
@@ -266,10 +266,10 @@ class Template(threading.Thread):
                     r_core = row['core-no']
                 if p_core!="" and r_core!="":
                     break
-            self.log_update(f"P_core = {p_core}, R_core = {r_core}")
+            # self.log_update(f"P_core = {p_core}, R_core = {r_core}")
             if p_core != r_core:
                 self.data6.append({"p-core":p_core,"p-port":rows['P-port-name'],"p-port-swc":p_swc,"r-core":r_core,"r-port":rows['R-port-name'],"r-port-swc":r_swc})
-                self.log_update(f"Different core to appended to data P = {p_swc_name} - R = {r_swc_name} :: {p_core} - {r_core}")
+                # self.log_update(f"Different core to appended to data P = {p_swc_name} - R = {r_swc_name} :: {p_core} - {r_core}")
         self.highlight("Task 6 Finished")
     
     def task7(self):
@@ -335,7 +335,7 @@ class Template(threading.Thread):
         integration_requirements = Element('IntegrationRequirements')
         connections = SubElement(integration_requirements, 'Connections')
         sender_receiver = SubElement(connections, 'SenderReceiver')
-        self.log_update("Root elements created")
+        # self.log_update("Root elements created")
 
         for row in self.data6:
             connection = SubElement(sender_receiver, 'Connection')
@@ -344,7 +344,7 @@ class Template(threading.Thread):
             sender = SubElement(connection, 'Sender', Parent=row['p-port-swc'])
             sender.text = row['p-port']
             count = count+1
-            self.log_update("f{count} connection entered")
+            # self.log_update("f{count} connection entered")
 
         xml_str = tostring(integration_requirements, encoding='unicode', method='xml')
         dom = xml.dom.minidom.parseString(xml_str)
@@ -359,7 +359,7 @@ class Template(threading.Thread):
             writer.write(root)
 
     def get_xml_basics(self, name):
-        self.log_update("Getting xml Basics For {0}".format(name))
+        # self.log_update("Getting xml Basics For {0}".format(name))
         root = etree.parse(name).getroot()
         if root.nsmap:
             ns = {'ns': root.nsmap[None]}
