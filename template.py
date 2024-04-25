@@ -71,7 +71,7 @@ class Template(threading.Thread):
             self.task4()
             self.task5()
             self.task6()
-            self.task7()
+            # self.task7()
             self.task8()
             self.result_path = "LOG: {0} \n RESULT: {1}".format(os.path.join(self.workspace, "Template.log"), self.workspace)
             self.log_update("LOG: {0}".format(os.path.join(self.workspace, "Template.log")))
@@ -175,7 +175,7 @@ class Template(threading.Thread):
         for ecuc in root.findall(tag,ns):
             short_name = ecuc.find('.//ns:SHORT-NAME',ns).text
             if "_EcuSwComposition" in short_name:
-                self.log_update(f"Found short name satisfying criteria : {short_name}")
+                # self.log_update(f"Found short name satisfying criteria : {short_name}")
                 if "_core" in short_name.lower():
                     index = short_name.lower().find("_core") + 5
                     core_no = short_name[index : index + 1]
@@ -205,10 +205,10 @@ class Template(threading.Thread):
 
         for file_path in folder_path.iterdir():
             if file_path.suffix == '.arxml':
-                self.log_update(f"Started parsing {file_path.name}")
+                # self.log_update(f"Started parsing {file_path.name}")
                 self.parse_xml1(file_path,"SERVICE-SW-COMPONENT-TYPE")
                 self.parse_xml1(file_path,"APPLICATION-SW-COMPONENT-TYPE")
-                self.log_update(f"Parsing done {file_path.name}")
+                # self.log_update(f"Parsing done {file_path.name}")
         self.highlight("Task 1 Finished")
 
     def task2(self):
@@ -332,6 +332,41 @@ class Template(threading.Thread):
 
     def task8(self):
         self.highlight("Task 8 Started")
+
+        df1 = pd.DataFrame(self.data1)
+        df2 = pd.DataFrame(self.data2)
+        df3 = pd.DataFrame(self.data3)
+        df4 = pd.DataFrame(self.data4)
+        df5 = pd.DataFrame(self.data5)
+        df6 = pd.DataFrame(self.data6)
+        df7 = pd.DataFrame(self.data7)
+        
+        wb = Workbook()
+        wb.remove(wb.active)
+        ws1 = wb.create_sheet(title='Task1-ports')
+        ws2 = wb.create_sheet(title='Task2-interfaces')
+        ws3 = wb.create_sheet(title='Task3-datatype')
+        ws4 = wb.create_sheet(title='Task4-flatextract')
+        ws5= wb.create_sheet(title='Task5-coredetails')
+        ws6 = wb.create_sheet(title='Task6-intercore')
+        ws7 = wb.create_sheet(title="Task7-datasheet")
+
+        for r in dataframe_to_rows(df1,index=False):
+            ws1.append(r)
+        for r in dataframe_to_rows(df2,index=False):
+            ws2.append(r)
+        for r in dataframe_to_rows(df3,index=False):
+            ws3.append(r)
+        for r in dataframe_to_rows(df4,index=False):
+            ws4.append(r)
+        for r in dataframe_to_rows(df5,index=False):
+            ws5.append(r)
+        for r in dataframe_to_rows(df6,index=False):
+            ws6.append(r)
+        for r in dataframe_to_rows(df7,index=False):
+            ws7.append(r)
+        wb.save('Port_Data.xlsx')
+        
         integration_requirements = Element('IntegrationRequirements')
         connections = SubElement(integration_requirements, 'Connections')
         sender_receiver = SubElement(connections, 'SenderReceiver')
