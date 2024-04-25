@@ -342,7 +342,7 @@ class Template(threading.Thread):
         df7 = pd.DataFrame(self.data7)
         
         wb = Workbook()
-        wb1 = Worbook()
+        wb1 = Workbook()
         wb.remove(wb.active)
         wb1.remove(wb1.active)
         ws1 = wb.create_sheet(title='Task1-ports')
