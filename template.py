@@ -301,7 +301,7 @@ class Template(threading.Thread):
         df4 = pd.DataFrame(self.data4)
         df5 = pd.DataFrame(self.data5)
         df6 = pd.DataFrame(self.data6)
-        df7 = pd.DataFrame(self.data7)
+        # df7 = pd.DataFrame(self.data7)
         
         wb = Workbook()
         wb.remove(wb.active)
@@ -311,7 +311,7 @@ class Template(threading.Thread):
         ws4 = wb.create_sheet(title='Task4-flatextract')
         ws5= wb.create_sheet(title='Task5-coredetails')
         ws6 = wb.create_sheet(title='Task6-intercore')
-        ws7 = wb.create_sheet(title="Task7-datasheet")
+        # ws7 = wb.create_sheet(title="Task7-datasheet")
 
         for r in dataframe_to_rows(df1,index=False):
             ws1.append(r)
@@ -325,8 +325,8 @@ class Template(threading.Thread):
             ws5.append(r)
         for r in dataframe_to_rows(df6,index=False):
             ws6.append(r)
-        for r in dataframe_to_rows(df7,index=False):
-            ws7.append(r)
+        # for r in dataframe_to_rows(df7,index=False):
+            # ws7.append(r)
         wb.save('Port_Data.xlsx')
         self.highlight("Task 7 Finished")
 
