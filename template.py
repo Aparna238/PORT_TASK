@@ -342,44 +342,41 @@ class Template(threading.Thread):
         df6 = pd.DataFrame(self.data6)
         # df7 = pd.DataFrame(self.data7)
 
-        df1.to_excel("ports.xlsx")
-        df2.to_excel("interfaces.xlsx")
-        df3.to_excel("datatype.xlsx")
-        df4.to_excel("flatextract.xlsx")
-        df5.to_excel("coredetails.xlsx")
-        df6.to_excel("intercore.xlsx")
+        # df1.to_excel("ports.xlsx")
+        # df2.to_excel("interfaces.xlsx")
+        # df3.to_excel("datatype.xlsx")
+        # df4.to_excel("flatextract.xlsx")
+        # df5.to_excel("coredetails.xlsx")
+        # df6.to_excel("intercore.xlsx")
         # df7.to_excel("datasheet.xlsx")
         
         
-        # wb = Workbook()
-        # wb1 = Workbook()
-        # wb.remove(wb.active)
-        # wb1.remove(wb1.active)
-        # ws1 = wb.create_sheet(title='Task1-ports')
-        # ws2 = wb.create_sheet(title='Task2-interfaces')
-        # ws3 = wb.create_sheet(title='Task3-datatype')
-        # ws4 = wb1.create_sheet(title='Task4-flatextract')
-        # ws5= wb1.create_sheet(title='Task5-coredetails')
-        # ws6 = wb1.create_sheet(title='Task6-intercore')
-        # # ws7 = wb.create_sheet(title="Task7-datasheet")
+        wb = Workbook()
+        wb.remove(wb.active)
+        ws1 = wb.create_sheet(title='Task1-ports')
+        ws2 = wb.create_sheet(title='Task2-interfaces')
+        ws3 = wb.create_sheet(title='Task3-datatype')
+        ws4 = wb.create_sheet(title='Task4-flatextract')
+        ws5 = wb.create_sheet(title='Task5-coredetails')
+        ws6 = wb.create_sheet(title='Task6-intercore')
+        # ws7 = wb.create_sheet(title="Task7-datasheet")
 
-        # for r in dataframe_to_rows(df1,index=False):
-        #      ws1.append(r)
-        # wb.save('ports.xlsx')
-        # for r in dataframe_to_rows(df2,index=False):
-        #     ws2.append(r)
-        # for r in dataframe_to_rows(df3,index=False):
-        #     ws3.append(r)
-        # for r in dataframe_to_rows(df4,index=False):
-        #     ws4.append(r)
-        # for r in dataframe_to_rows(df5,index=False):
-        #     ws5.append(r)
-        # for r in dataframe_to_rows(df6,index=False):
-        #     ws6.append(r)
-        # # for r in dataframe_to_rows(df7,index=False):
-        # #     ws7.append(r)
+        for r in dataframe_to_rows(df1,index=False):
+             ws1.append(r)
+        for r in dataframe_to_rows(df2,index=False):
+            ws2.append(r)
+        for r in dataframe_to_rows(df3,index=False):
+            ws3.append(r)
+        for r in dataframe_to_rows(df4,index=False):
+            ws4.append(r)
+        for r in dataframe_to_rows(df5,index=False):
+            ws5.append(r)
+        for r in dataframe_to_rows(df6,index=False):
+            ws6.append(r)
+        # for r in dataframe_to_rows(df7,index=False):
+        #     ws7.append(r)
         
-        # wb1.save('Intercore.xlsx')
+        wb.save('Port_Data.xlsx')
         
         integration_requirements = Element('IntegrationRequirements')
         connections = SubElement(integration_requirements, 'Connections')
