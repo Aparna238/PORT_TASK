@@ -333,7 +333,8 @@ class Template(threading.Thread):
     def task8(self):
         self.highlight("Task 8 Started")
 
-        # df1 = pd.DataFrame(self.data1)
+        df1 = pd.DataFrame(self.data1)
+        df1 = df1.drop_duplicates()
         df2 = pd.DataFrame(self.data2)
         df3 = pd.DataFrame(self.data3)
         df4 = pd.DataFrame(self.data4)
@@ -341,7 +342,7 @@ class Template(threading.Thread):
         df6 = pd.DataFrame(self.data6)
         # df7 = pd.DataFrame(self.data7)
 
-        # df1.to_excel("ports.xlsx")
+        df1.to_excel("ports.xlsx")
         df2.to_excel("interfaces.xlsx")
         df3.to_excel("datatype.xlsx")
         df4.to_excel("flatextract.xlsx")
