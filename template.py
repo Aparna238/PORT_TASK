@@ -339,7 +339,7 @@ class Template(threading.Thread):
         df4 = pd.DataFrame(self.data4)
         df5 = pd.DataFrame(self.data5)
         df6 = pd.DataFrame(self.data6)
-        df7 = pd.DataFrame(self.data7)
+        # df7 = pd.DataFrame(self.data7)
 
         # df1.to_excel("ports.xlsx")
         df2.to_excel("interfaces.xlsx")
@@ -347,7 +347,7 @@ class Template(threading.Thread):
         df4.to_excel("flatextract.xlsx")
         df5.to_excel("coredetails.xlsx")
         df6.to_excel("intercore.xlsx")
-        df7.to_excel("datasheet.xlsx")
+        # df7.to_excel("datasheet.xlsx")
         
         
         wb = Workbook()
