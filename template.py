@@ -347,7 +347,7 @@ class Template(threading.Thread):
         df4.to_excel("flatextract.xlsx")
         df5.to_excel("coredetails.xlsx")
         df6.to_excel("intercore.xlsx")
-        df7.to_excel("datasheet.xlsx")
+        # df7.to_excel("datasheet.xlsx")
         
         
         # wb = Workbook()
