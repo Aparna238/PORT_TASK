@@ -333,7 +333,7 @@ class Template(threading.Thread):
     def task8(self):
         self.highlight("Task 8 Started")
 
-        df1 = pd.DataFrame(self.data1)
+        # df1 = pd.DataFrame(self.data1)
         df2 = pd.DataFrame(self.data2)
         df3 = pd.DataFrame(self.data3)
         df4 = pd.DataFrame(self.data4)
@@ -347,14 +347,14 @@ class Template(threading.Thread):
         df4.to_excel("flatextract.xlsx")
         df5.to_excel("coredetails.xlsx")
         df6.to_excel("intercore.xlsx")
-        # df7.to_excel("datasheet.xlsx")
+        df7.to_excel("datasheet.xlsx")
         
         
-        wb = Workbook()
+        # wb = Workbook()
         # wb1 = Workbook()
-        wb.remove(wb.active)
+        # wb.remove(wb.active)
         # wb1.remove(wb1.active)
-        ws1 = wb.create_sheet(title='Task1-ports')
+        # ws1 = wb.create_sheet(title='Task1-ports')
         # ws2 = wb.create_sheet(title='Task2-interfaces')
         # ws3 = wb.create_sheet(title='Task3-datatype')
         # ws4 = wb1.create_sheet(title='Task4-flatextract')
@@ -362,9 +362,9 @@ class Template(threading.Thread):
         # ws6 = wb1.create_sheet(title='Task6-intercore')
         # # ws7 = wb.create_sheet(title="Task7-datasheet")
 
-        for r in dataframe_to_rows(df1,index=False):
-             ws1.append(r)
-        wb.save('ports.xlsx')
+        # for r in dataframe_to_rows(df1,index=False):
+        #      ws1.append(r)
+        # wb.save('ports.xlsx')
         # for r in dataframe_to_rows(df2,index=False):
         #     ws2.append(r)
         # for r in dataframe_to_rows(df3,index=False):
