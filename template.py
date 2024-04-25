@@ -342,14 +342,16 @@ class Template(threading.Thread):
         df7 = pd.DataFrame(self.data7)
         
         wb = Workbook()
+        wb1 = Worbook()
         wb.remove(wb.active)
+        wb1.remove(wb1.active)
         ws1 = wb.create_sheet(title='Task1-ports')
         ws2 = wb.create_sheet(title='Task2-interfaces')
         ws3 = wb.create_sheet(title='Task3-datatype')
-        ws4 = wb.create_sheet(title='Task4-flatextract')
-        ws5= wb.create_sheet(title='Task5-coredetails')
-        ws6 = wb.create_sheet(title='Task6-intercore')
-        ws7 = wb.create_sheet(title="Task7-datasheet")
+        ws4 = wb1.create_sheet(title='Task4-flatextract')
+        ws5= wb1.create_sheet(title='Task5-coredetails')
+        ws6 = wb1.create_sheet(title='Task6-intercore')
+        # ws7 = wb.create_sheet(title="Task7-datasheet")
 
         for r in dataframe_to_rows(df1,index=False):
             ws1.append(r)
@@ -363,9 +365,10 @@ class Template(threading.Thread):
             ws5.append(r)
         for r in dataframe_to_rows(df6,index=False):
             ws6.append(r)
-        for r in dataframe_to_rows(df7,index=False):
-            ws7.append(r)
-        wb.save('Port_Data.xlsx')
+        # for r in dataframe_to_rows(df7,index=False):
+        #     ws7.append(r)
+        wb.save('Data_type.xlsx')
+        wb1.save('Intercore.xlsx')
         
         integration_requirements = Element('IntegrationRequirements')
         connections = SubElement(integration_requirements, 'Connections')
