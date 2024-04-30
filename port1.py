@@ -61,6 +61,8 @@ class Template(threading.Thread):
             list_as_string = json.dumps(data7)
             os.environ['DATA7'] = list_as_string
             self.load_bar = 10
+            for key, value in os.environ.items():
+                print(f"export {key}={value}")
 
             # if self.checkbox1:
             #     self.log_update("Check box 1 checked")
