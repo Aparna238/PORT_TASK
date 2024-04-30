@@ -52,12 +52,18 @@ class Template(threading.Thread):
             self.log_update("Starting The Process")
             data7, data6 = self.generate_xlsx()
             self.load_bar = 7
-            self.generate_xml(data6)      
-            os.environ['CHECKBOX1'] = self.checkbox1
-            self.load_bar = 8
-            os.environ['CHECKBOX2'] = self.checkbox2
-            self.load_bar = 9
-            os.environ['CHECKBOX3'] = self.checkbox3
+            self.generate_xml(data6)
+            with open("envfile.txt","w") as f:
+                f.write(f"CHECKBOX1={self.checkbox1}\n")
+                f.write(f"CHECKBOX2={self.checkbox2}\n")
+                f.write(f"CHECKBOX3={self.checkbox3}\n")
+            #     list_as_string = json.dumps(data7)
+            #     f.write(f"={self.checkbox3}\n")
+            # os.environ['CHECKBOX1'] = self.checkbox1
+            # self.load_bar = 8
+            # os.environ['CHECKBOX2'] = self.checkbox2
+            # self.load_bar = 9
+            # os.environ['CHECKBOX3'] = self.checkbox3
             list_as_string = json.dumps(data7)
             os.environ['DATA7'] = list_as_string
             self.load_bar = 10
