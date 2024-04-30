@@ -357,8 +357,6 @@ class Template(threading.Thread):
         df1 = df1.drop_duplicates()
         df2 = df2.drop_duplicates()
         df3 = df3.drop_duplicates(subset=['Application_Ref','Implementation_Ref','Category'])
-        df1.to_excel("11.xlsx")
-        df2.to_excel("22.xlsx")
         # for ind1, row1 in df1.iterrows():
         #     i_name = row1['Interface_name']
         #     if 'isignal_' in i_name:
