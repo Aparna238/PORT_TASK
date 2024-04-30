@@ -52,12 +52,14 @@ class Template(threading.Thread):
             self.log_update("Starting The Process")
             data7, data6 = self.generate_xlsx()
             self.load_bar = 7
-            self.generate_xml(data6)
+            self.generate_xml(data6)      
+            os.environ['CHECKBOX1'] = self.checkbox1
             self.load_bar = 8
-            time.sleep(2)
+            os.environ['CHECKBOX2'] = self.checkbox2
             self.load_bar = 9
-            time.sleep(2)
+            os.environ['CHECKBOX3'] = self.checkbox3
             self.load_bar = 10
+            os.environ['DATA7'] = data7
 
             # if self.checkbox1:
             #     self.log_update("Check box 1 checked")
