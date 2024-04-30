@@ -61,8 +61,6 @@ class Template(threading.Thread):
             list_as_string = json.dumps(data7)
             os.environ['DATA7'] = list_as_string
             self.load_bar = 10
-            for key, value in os.environ.items():
-                print(f"export {key}={value}")
 
             # if self.checkbox1:
             #     self.log_update("Check box 1 checked")
@@ -85,8 +83,6 @@ class Template(threading.Thread):
 
             with run_flag_lock:
                 running = False
-
-            return self.checkbox1, self.checkbox2, self.checkbox3, data7
         except BaseException as error:
             self.error = self.error + "DETAIL:" + str(error)
             for lines in traceback.format_exc().split("\n"):
