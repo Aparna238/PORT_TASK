@@ -6,7 +6,6 @@ from xml.etree.ElementTree import Element, SubElement, tostring
 from PIL import Image, ImageTk
 from sys import exit, stdout
 import tkinter.font as font
-from . import trigger_shell, open_outlook, search_swc
 from lxml import etree
 import subprocess
 from openpyxl import load_workbook
