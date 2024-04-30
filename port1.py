@@ -18,6 +18,7 @@ import webbrowser
 import argparse
 import sys
 import logging
+import json
 import time
 import os
 import io
@@ -57,7 +58,7 @@ class Template(threading.Thread):
             os.environ['CHECKBOX2'] = self.checkbox2
             self.load_bar = 9
             os.environ['CHECKBOX3'] = self.checkbox3
-            list_as_string = ','.join(data7)
+            list_as_string = json.dumps(data7)
             os.environ['DATA7'] = list_as_string
             self.load_bar = 10
 
@@ -108,7 +109,7 @@ class Template(threading.Thread):
     def search_swc(self):
         self.highlight(f"Searching for {self.swc_name} as SWC name")
         str_data= os.environ.get('DATA7', '')
-        data7 = str_data.split(',')
+        data7 = json.loads(str_data)
         new_data = []
         for row in data7:
             if self.swc_name == row['Swc_component']:
