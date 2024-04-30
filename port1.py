@@ -85,6 +85,8 @@ class Template(threading.Thread):
 
             with run_flag_lock:
                 running = False
+
+            return self.checkbox1, self.checkbox2, self.checkbox3, data7
         except BaseException as error:
             self.error = self.error + "DETAIL:" + str(error)
             for lines in traceback.format_exc().split("\n"):
