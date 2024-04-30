@@ -91,6 +91,7 @@ class Template(threading.Thread):
             self.load_bar = str(self.load_bar) + "_BREAK"
 
     def trigger_batch_file(self):
+        print("IN1")
         self.highlight("Generating shell script")
         with open('bash_script.sh', 'w') as batch_file:
                 batch_file.write('#!/bin/bash\n')  # Specify shebang for bash script
@@ -100,6 +101,7 @@ class Template(threading.Thread):
         self.highlight("Shell script triggered")
 
     def open_outlook(self):
+        print("IN2")
         self.highlight("Opening outlook in firefox")
         url = "https://outlook.office.com/mail/"
         firefox_path = "/usr/bin/firefox"  
@@ -107,6 +109,7 @@ class Template(threading.Thread):
         webbrowser.get('firefox').open(url)
 
     def search_swc(self):
+        print("IN3")
         self.highlight(f"Searching for {self.swc_name} as SWC name")
         str_data= os.environ.get('DATA7', '')
         data7 = json.loads(str_data)
